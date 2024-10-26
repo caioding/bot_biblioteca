@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biblioteca</title>
+</head>
+<body>
+    <h1>Autores</h1>
+    <ul>
+        {% for autor in autores %}
+            <li>{{ autor.nome }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/add_autor" method="post">
+        <input type="text" name="nome" placeholder="Nome do Autor">
+        <button type="submit">Adicionar Autor</button>
+    </form>
+
+    <h1>Livros</h1>
+    <ul>
+        {% for livro in livros %}
+            <li>{{ livro.titulo }} - {{ livro.codigo }} - Autor: {{ livro.autor.nome }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/add_livro" method="post">
+        <input type="text" name="titulo" placeholder="Título do Livro">
+        <input type="text" name="codigo" placeholder="Código do Livro">
+        <select name="autor_id">
+            {% for autor in autores %}
+                <option value="{{ autor.id }}">{{ autor.nome }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Adicionar Livro</button>
+    </form>
+
+    <h1>Bibliotecas</h1>
+    <ul>
+        {% for biblioteca in bibliotecas %}
+            <li>{{ biblioteca.nome }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/add_biblioteca" method="post">
+        <input type="text" name="nome" placeholder="Nome da Biblioteca">
+        <button type="submit">Adicionar Biblioteca</button>
+    </form>
+
+    <h1>Empréstimos</h1>
+    <ul>
+        {% for emprestimo in emprestimos %}
+            <li>Livro: {{ emprestimo.livro.titulo }} - Cliente: {{ emprestimo.cliente }} - Data de Empréstimo: {{ emprestimo.data_emprestimo }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/add_emprestimo" method="post">
+        <select name="livro_id">
+            {% for livro in livros %}
+                <option value="{{ livro.id }}">{{ livro.titulo }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="cliente" placeholder="Nome do Cliente">
+        <input type="date" name="data_emprestimo" placeholder="Data de Empréstimo">
+        <button type="submit">Adicionar Empréstimo</button>
+    </form>
+</body>
+</html>
